@@ -243,4 +243,45 @@ const ValidarExpEmail=(email="")=>{
     ?console.info(`${email} ,es un nombre valido`)
     :console.warn("No es valido el nombre");
 }
-ValidarExpEmail("fdf@gmail.com.")
+ValidarExpEmail("fdf@gmail.com");
+
+//21) Programa una función que dado un array numérico devuelve otro array con los números elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+const alcuadrado=(arreglo=undefined)=>{
+    if(arreglo===undefined)return console.warn("No es un arreglo");
+    if(!(arreglo instanceof Array))return console.error("El valor ingresado no es un arreglo");
+    if(arreglo.length===0)return console.error("El arreglo esta vacio");
+    for(let num of arreglo){
+        if(typeof num !== "number")return console.error("LOS VALORES NO SON NUMEROS");
+    
+    }
+    const arreglof=arreglo.map(el=>el*el);
+    return console.info(`El arreglo original= ${arreglo},El arreglo al cuadrado ${arreglof}`);
+}
+alcuadrado([3,4,3]);
+//22) Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+const mayorymenor=(arreglo=undefined)=>{
+    if(arreglo===undefined)return console.warn("No es un arreglo");
+    if(!(arreglo instanceof Array))return console.error("El valor ingresado no es un arreglo");
+    if(arreglo.length===0)return console.error("El arreglo esta vacio");
+    for(let num of arreglo){
+        if(typeof num !== "number")return console.error("LOS VALORES NO SON NUMEROS");
+    
+    }
+    return console.info(`Arreglo original ${arreglo},el valor mayor es ${Math.max(...arreglo)} y el valor minimo es ${Math.min(...arreglo)}`)
+}
+mayorymenor([3,4,3,-45]);
+//23) Programa una función que dado un array de números devuelva un objeto con 2 arreglos en el primero almacena los números pares y en el segundo los impares, pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}
+const separarparimpar=(arreglo=undefined)=>{
+    if(arreglo===undefined)return console.warn("No es un arreglo");
+    if(!(arreglo instanceof Array))return console.error("El valor ingresado no es un arreglo");
+    if(arreglo.length===0)return console.error("El arreglo esta vacio");
+    for(let num of arreglo){
+        if(typeof num !== "number")return console.error("LOS VALORES NO SON NUMEROS");
+    
+    }
+    return console.info({
+        pares:arreglo.filter(nro=>nro%2===0),
+        impares:arreglo.filter(nro=>nro%2===1)
+    })
+}
+separarparimpar([1,2,3,4,5,6,7,8,9])

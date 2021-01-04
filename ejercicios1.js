@@ -213,3 +213,34 @@ const aniospasados=(fecha=undefined)=>{
 
 }
 aniospasados(new Date(1996,02,14))
+
+//18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+const nrodeVocalesCondonantes=(cadena=undefined)=>{
+    if(cadena===undefined )return console.warn("No ingresaste un texto");
+    var nroVocales=cadena.match(/[aeiouáéíóúü]/gi).length
+    return console.info(`El nro de vocales es ${nroVocales} y El nro de consonantes es ${(cadena.replace(/\s+/g, '')).length-nroVocales} de la palabra ${cadena}`)
+}
+nrodeVocalesCondonantes("Yhomira")
+nrodeVocalesCondonantes("Alexandra")
+nrodeVocalesCondonantes("Yhomira Alexandra")
+//19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+const ValidadNombre=(nombre="")=>{
+    if(!nombre)return console.warn("No ingresaste un nombre");
+    if(typeof nombre!== "string")return console.error(`El valor ${nombre} no es una cadena de texto`)
+    let expreg=/^[a-zñáéíóúü\s]+$/gi.test(nombre);
+
+    return(expreg)
+    ?console.info(`${nombre} ,es un nombre valido`)
+    :console.warn("No es valido el nombre");
+}
+ValidadNombre("Yhomira ññÑ")
+//20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+const ValidarExpEmail=(email="")=>{
+    if(!email)return console.warn("No ingresaste un nombre");
+    if(typeof email!== "string")return console.error(`El valor ${email} no es una cadena de texto`)
+    let expreg=/[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i.test(email);
+    return(expreg)
+    ?console.info(`${email} ,es un nombre valido`)
+    :console.warn("No es valido el nombre");
+}
+ValidarExpEmail("fdf@gmail.com.")

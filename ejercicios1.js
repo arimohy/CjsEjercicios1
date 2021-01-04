@@ -109,3 +109,107 @@ const factorial=(nro=0)=>{
 	console.info(total); 
 }
 factorial(5);
+//12) Programa una función que determine si un número es primo (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
+const primo=(numero =undefined)=>{
+    if(numero===undefined)return console.error(`El valor no ingresado`);
+    if(typeof numero!=="number")return console.error(`El valor "${numero}" no es un nro`);
+    if(numero==0)return console.error("El numero no puede ser 0");
+    if(numero==1)return console.error("El numero no puede ser 1");
+    if(Math.sign(numero)===-1)return console.error("El numero no puede ser negativo");
+    let divisible=false;
+    for (let i = 2; i < numero; i++) {
+        if((numero%i)==0){
+            divisible=true;
+            break;
+        }
+    }
+    return(divisible)
+    ?console.log(`el nro ${numero},no es primo`)
+    :console.log(`el nro ${numero},si es primo`)
+    
+}
+primo(20)
+//13) Programa una función que determine si un número es par o impar, pe. miFuncion(29) devolverá Impar.
+const espar=(nro=undefined)=>{
+    if(nro===undefined)return console.error(`El valor no ingresado`);
+    if(typeof nro!=="number")return console.error(`El valor "${nro}" no es un nro`);
+    if((nro%2)==0){
+        console.info(`El valor ${nro}, es par`); 
+    }
+    else
+    console.info(`El valor ${nro}, es impar`); 
+    
+}
+espar(10);
+//14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe. miFuncion(0,"C") devolverá 32°F.
+const ConvCAF=(grados =undefined,unidad=undefined)=>{
+    if(grados===undefined)return console.error(`El valor no ingresado`);
+    if(typeof grados!=="number")return console.error(`El valor "${grados}" no es un nro`);
+
+    if(unidad===undefined)return console.error(`El valor no ingresado`);
+    if(typeof unidad!=="string")return console.error(`El valor "${grados}" no es un striing`);
+    if(unidad.length!==1 || !/(C||F)/.test(unidad)) return console.warn("valor de unidad no reconocido")
+    if(unidad=="C"){
+        var f=(grados*9/5)+32;
+        console.info(`El grado ${grados} °C,en Fahrenheit es ${f} °F`)
+    }
+    else{
+        var c=(grados-3)*5/9;
+        console.info(`El grado ${grados} °F,en Celcius es ${c} °C`)
+
+    }
+    
+}
+ConvCAF(110,"F");
+ConvCAF(23,"C");
+//15) Programa una función para convertir números de base binaria a decimal y viceversa, pe. miFuncion(100,2) devolverá 4 base 10.
+const BinarioDecimal=(nro=undefined,base=undefined)=>{
+    if(nro===undefined)return console.error(`El valor no ingresado`);
+    if(typeof nro!=="number")return console.error(`El valor "${nro}" no es un nro`);
+  
+    if(base===undefined)return console.error(`El valor de base no ingresado`);
+    if(typeof base!=="number")return console.error(`El valor "${base}" no es un nro`);
+    
+    if(base ===2 ){
+        return console.info(`${nro} base ${base} es ${parseInt(nro,base)} base 10`);
+
+    }else if(base===10)
+    return console.info(`${nro} base ${base} es ${nro.toString(2)} base 2`)
+
+    else{
+        return console.error("el tipo de base no es valido")
+    }
+}
+
+BinarioDecimal(100,2);
+BinarioDecimal(114,10);
+//16) Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, pe. miFuncion(1000, 20) devolverá 800.
+const Descuento=(nro=undefined,descuento=0)=>{
+    if(nro===undefined)return console.error(`El valor no ingresado`);
+    if(typeof nro!=="number")return console.error(`El valor "${nro}" no es un nro`);
+   
+    if(descuento === 0) return console.info(`${nro} no tiene descuento`);
+    if(Math.sign(nro)==-1) return console.error("el monto no puede ser negativo")
+    if(Math.sign(descuento)==-1) return console.error("el descuento  no puede ser negativo")
+    return console.info(`${nro}-${descuento}%=${nro-(nro*descuento)/100}`)
+   
+}
+
+Descuento(120,12)
+
+//17) Programa una función que dada una fecha válida determine cuantos años han pasado hasta el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020).
+const aniospasados=(fecha=undefined)=>{
+    if(fecha===undefined )return console.warn("No ingresaste fecha");
+    if(!(fecha instanceof Date)) return console.error("el valor no es una fecha valida");
+
+    let hoymenosfecha=new Date().getTime()-fecha.getTime(),
+    anioms=1000*60*60*24*365
+    aniosh=Math.floor(hoymenosfecha/anioms);
+    return(Math.sign(aniosh)===-1)
+    ?console.info(`Faltan ${Math.abs(aniosh)} años para el ${fecha.getFullYear()}.`)
+    :(Math.sign(aniosh) ===1)
+    ?console.info(`Pasaron ${aniosh} años desde ${fecha.getFullYear()}.`)
+    :console.info(`Estamos en el año actual ${fecha.getFullYear()}`)
+
+}
+aniospasados(new Date(1996,02,14))

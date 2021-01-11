@@ -285,3 +285,210 @@ const separarparimpar=(arreglo=undefined)=>{
     })
 }
 separarparimpar([1,2,3,4,5,6,7,8,9])
+//24) Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, el primero tendrá los numeros ordenados en forma ascendente y el segundo de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+const OrdAscDesc=(arreglo=undefined)=>{
+    if(arreglo===undefined)return console.warn("No es un arreglo");
+    if(!(arreglo instanceof Array))return console.error("El valor ingresado no es un arreglo");
+    if(arreglo.length===0)return console.error("El arreglo esta vacio");
+    for(let num of arreglo){
+        if(typeof num !== "number")return console.error("LOS VALORES NO SON NUMEROS");
+    
+    }
+    return console.info({
+        arreglo,
+        asc:arreglo.map(el=>el).sort(),
+        desc:arreglo.map(el=>el).sort().reverse()
+    })
+}
+OrdAscDesc([7, 5,7,8,6])
+//25) Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
+const Eliminarduplicados=(arreglo=undefined)=>{
+    if(arreglo===undefined)return console.warn("No es un arreglo");
+    if(!(arreglo instanceof Array))return console.error("El valor ingresado no es un arreglo");
+    if(arreglo.length===0)return console.error("El arreglo esta vacio");
+    if(arreglo.length===1)return console.error("aumente mas valores a su arreglo");
+    return console.info({
+        arreglo,
+        sinduplicados:arreglo.filter((value,index,self)=>self.indexOf(value)===index)
+    })
+}
+Eliminarduplicados(["x", 10, "x", 2, "10", 10, true, true]) 
+//26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+const promedioarreglo=(arreglo=undefined)=>{
+    if(arreglo===undefined)return console.warn("No es un arreglo");
+    if(!(arreglo instanceof Array))return console.error("El valor ingresado no es un arreglo");
+    if(arreglo.length===0)return console.error("El arreglo esta vacio");
+    for(let num of arreglo){
+        if(typeof num !== "number")return console.error("LOS VALORES NO SON NUMEROS");
+    
+    }
+    return console.info(
+        arreglo.reduce((total,num,index,arreglo)=>{
+            total+=num;
+            if(index===arreglo.length-1){
+                return`El promedio de ${arreglo.join("+")}es ${total/arreglo.length}`;
+            }
+            else{
+                return total;
+            }
+        })
+    )
+    }
+promedioarreglo([1,9,4,6,4])
+
+//27) Programa una clase llamada Pelicula.
+
+    //La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
+    //- Todos los datos del objeto son obligatorios.
+    //- Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 
+    //   7 restantes números.
+    //- Valida que el título no rebase los 100 caracteres.
+    //- Valida que el director no rebase los 50 caracteres.
+    //- Valida que el año de estreno sea un número entero de 4 dígitos.
+    //- Valida que el país o paises sea introducidos en forma de arreglo.
+    //- Valida que los géneros sean introducidos en forma de arreglo.
+    // - Valida que los géneros introducidos esten dentro de los géneros 
+    //   aceptados*.
+    //- Crea un método estático que devuelva los géneros aceptados*.
+    //- Valida que la calificación sea un número entre 0 y 10 pudiendo ser 
+        //decimal de una posición.
+    //- Crea un método que devuelva toda la ficha técnica de la película.
+    //- Apartir de un arreglo con la información de 3 películas genera 3 
+    // instancias de la clase de forma automatizada e imprime la ficha técnica 
+        //de cada película.
+
+//* Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+class Pelicula{
+    constructor({id,titulo,director,estreno,pais,generos,calificacion})
+    {
+        this.id=id;
+        this.titulo=titulo;
+        this.director=director;
+        this.estreno=estreno;
+        this.pais=pais;
+        this.generos=generos;
+        this.calificacion=calificacion;
+        //validaciones
+        this.validarIMDB(id)
+        this.validarCadena("Nombre del Titulo",titulo,100)
+        this.validarCadena("Nombre del director",director,50)
+        this.validarnro("Estreno",estreno,4)
+        this.validararreglo("Pais",pais)
+        this.validarGeneros(generos)
+        this.validarCalificacion(calificacion)
+    }
+    static get Listageneros(){
+        return ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary ","Drama", "Family", "Fantasy", "Film Noir", "Game-Show", "History", "Horror", "Musical", "Music", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"];
+    }
+    static generosaceptados()
+    {
+        return console.info(`Los generos aceptados son:${Pelicula.Listageneros.join(",")}`);
+    }
+    validarCadena(propiedad,valor,tamano){
+        if(!valor) return console.warn(` ${propiedad} "${valor}" Esta vacio`);
+        if(typeof valor !=="string")return console.error(`${propiedad} "${valor}" ingresado ,no es una cadena de texto`);
+        if(valor.length>tamano)return console.error(`${propiedad} "${valor}" ingresado ,no puede ser mayor "${tamano}"`);
+        return true;
+    }
+    validarnro(propiedad,valor,tamano){
+        if(!valor )return console.warn(` ${propiedad} "${valor}" Esta vacio`);
+        if(typeof valor !=="number")return console.error(`${propiedad} "${valor}" ingresado ,no es un  numero`);
+        var expre=new RegExp("^([0-9]){"+tamano+"}$");
+        if(!expre.test(valor))
+            return console.error(` "${valor}"no es valido,el valor debe contar con ${tamano}digitos`)
+        
+        return true;
+    }
+    validarnro(propiedad,valor){
+        if(!valor )return console.warn(` ${propiedad} "${valor}" Esta vacio`);
+        if(typeof valor !=="number")return console.error(`${propiedad} "${valor}" ingresado ,no es un  numero`);
+        return true;
+    }
+    validararreglo(propiedad,valor){
+        if(!(valor instanceof Array))return console.error(`${propiedad} "${valor}" ingresado ,no es un arreglo`);
+        if(valor.length===0)return console.error(`arreglo ingresado ,no tiene datos`);
+        for(let cadena of valor){
+            if(typeof cadena !=="string")return console.error(`EL VALOR ${cadena} no es una cadena de texto`);
+        }
+        return true;
+        
+    }
+   
+    validarIMDB(id){
+        if(this.validarCadena("IMDB id",id,9)){
+            if(!(/^([a-z]){2}([0-9]){7}$/.test(id)))
+            return console.error(`IMDB "${id}"no es valido debe tener 9 caracteres,los 2 primeros caracteres en minuscula y los 7 ultimos numeros`)
+        }
+    }
+
+    validarGeneros(generos){
+
+        if(this.validararreglo("Generos",generos)){
+            for(let genero of generos){
+                //console.log(genero,Pelicula.Listageneros.includes(genero));
+                if(!Pelicula.Listageneros.includes(genero)){
+                console.error( `Genero(s) incorrecto "${generos.join(",")}"`)
+                Pelicula.generosaceptados();
+                }
+            }
+        }
+
+    }
+    validarCalificacion(calificacion){
+        if(this.validarnro("Calificacion",calificacion)){
+            return(calificacion<0 || calificacion>10)
+            ?console.error(`la calificacion  tiene que ser un nuemero entre 0 y 10`)
+            :this.calificacion=calificacion.toFixed(1);
+        }
+    }
+
+
+    fichatecnica(){
+        console.info(`Ficha tecnica:\nTitulo: "${this.titulo}"\nDirector: "${this.director}"\nAño estreno:\"${this.estreno}"\n
+        Pais: "${this.pais.join("_")}\n"Generos: "${this.generos.join(",")}"\n
+        Calificacion: "${this.calificacion}"\nIMDB id : "${this.id}"`);
+    }
+    
+}
+
+//Pelicula.generosaceptados();
+/*const peli =new Pelicula({
+    id:"mm1234567",
+    titulo:"1111111111111111111111111111111111111111111111111122222222222222222222222222222222222222222222222222",
+    director:"01234567890123456789012345678901234567890123456789",
+    estreno:2212,
+    pais:["md"],
+    generos:["Comedy","Horror"],
+    calificacion: 5.91412121
+});
+peli.fichatecnica();*/
+
+const mispelis =[{
+    id:"mm1234567",
+    titulo:"peli0",
+    director:"01234567890123456789012345678901234567890123456789",
+    estreno:2212,
+    pais:["md"],
+    generos:["Comedy","Horror"],
+    calificacion: 5.91412121
+},
+{
+    id:"mm1234568",
+    titulo:"peli1",
+    director:"01234567890123456789012345678901234567890123456789",
+    estreno:2212,
+    pais:["md"],
+    generos:["Comedy","Horror"],
+    calificacion: 5.91412121
+},
+{
+    id:"mm1234569",
+    titulo:"peli3",
+    director:"01234567890123456789012345678901234567890123456789",
+    estreno:2212,
+    pais:["md"],
+    generos:["Comedy","Horror"],
+    calificacion: 5.91412121
+}
+]
+mispelis.forEach(el=>new Pelicula(el).fichatecnica())
